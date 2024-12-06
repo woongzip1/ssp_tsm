@@ -46,7 +46,7 @@ def extract_frames(y, win_type='hamming', win_length=320, hop_length=160,):
 
 def stft(y, sr=16000, win_type='hamming', win_length=320, hop_length=160, n_fft=None,
          pad_mode='constant', figsize=(14, 4), cmap='viridis', 
-        #  vmin=-50, vmax=40,
+         vmin=-50, vmax=40,
          use_colorbar=True, plot=False, return_fig=False):
     
     """ 
@@ -97,9 +97,11 @@ def stft(y, sr=16000, win_type='hamming', win_length=320, hop_length=160, n_fft=
     # Plot option
     if plot:
         fig = plt.figure(figsize=figsize)
-        plt.imshow(np.abs(spec), aspect='auto', 
+        # spec = 20 * np.log10(np.abs(spec))
+        plt.imshow(20 * np.log10(np.abs(spec)), aspect='auto', 
+
                    cmap=cmap, 
-                #    vmin=vmin, vmax=vmax,
+                   vmin=vmin, vmax=vmax,
                    origin='lower', extent=[0, siglen_sec, 0, sr//2])
 
         if use_colorbar: plt.colorbar()
