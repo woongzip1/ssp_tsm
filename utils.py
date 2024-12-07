@@ -41,10 +41,10 @@ def draw_spec(x,
         # plt.close()
         plt.show()
         return stft
-    
+
 def spec_show(x,
-              figsize=(10, 6), title='', n_fft=2048,
-              win_len=1024, hop_len=256, sr=16000, cmap='inferno',
+              figsize=(10, 6), title='',
+              hop_len=256, sr=16000, cmap='inferno',
               vmin=-50, vmax=40, use_colorbar=True,
               ylim=None,
               x_extent = None,
@@ -52,6 +52,10 @@ def spec_show(x,
               label_fontsize=8,
                 return_fig=False,
                 save_fig=False, save_path=None):
+    """
+    Input 
+        x: complex STFT
+    """
     fig = plt.figure(figsize=figsize)
     
     x = 20 * np.log10(np.clip(np.abs(x), a_min=1e-8, a_max=None))

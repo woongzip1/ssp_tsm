@@ -9,6 +9,18 @@ from utils import draw_spec, audioshow
 from stft import stft, extract_frames
 
 # from tsm import SynchronousOLA, LSEE_TSM
+
+""" 
+Modified modules for 'frame selective' STFT and OLA
+Enables frame selective TSM, which makes certain frame faster or slower
+
+** overlapadd()
+** istft()
+** custom_stft()
+** SynchronousOLA()
+** modLSEE_TSM()
+
+"""
 def overlapadd(frames, win_length, Sa, frame_ranges, rate_ranges, win_type='hann', griffin=True):
     """
     Modified OLA proceSa with variable rates for specific frame ranges.
@@ -356,8 +368,6 @@ def mod_LSEE_TSM(y, rate=2, win_length=512, hop_length=256, frame_ranges=[(10, 2
                           rate_ranges=rate_ranges, win_type=win_type, griffin=griffin)
 
     return x_initial
-
-
 
 def main():
     dir_path = "./*.wav"
