@@ -18,7 +18,7 @@ Enables frame selective TSM, which makes certain frame faster or slower
 ** istft()
 ** custom_stft()
 ** SynchronousOLA()
-** modLSEE_TSM()
+** lsee_tsm_selective()
 
 """
 def overlapadd(frames, win_length, Sa, frame_ranges, rate_ranges, win_type='hann', griffin=True):
@@ -301,7 +301,7 @@ def SynchronousOLA(frames, win_length, Sa, frame_ranges, rate_ranges, win_type='
     y = y[win_length // 2:-win_length // 2]
     return y
 
-def mod_LSEE_TSM(y, rate=2, win_length=512, hop_length=256, frame_ranges=[(10, 20), (75, 100)], 
+def lsee_tsm_selective(y, rate=2, win_length=512, hop_length=256, frame_ranges=[(10, 20), (75, 100)], 
                  rate_ranges=[0.5, 1.2], num_iterations=50, initial='sola', 
                  win_type='hann', verbose=True, griffin=True, return_ser=False):
     """
@@ -385,7 +385,7 @@ def main():
     y, sr = librosa.load(glob(dir_path)[0], sr=None)
 
     # Perform TSM with variable rates
-    y_reconstructed = mod_LSEE_TSM(
+    y_reconstructed = lsee_tsm_selective(
         y, rate=RATE, win_length=WINLEN, hop_length=HOPLEN, frame_ranges=FRAME_RANGES, 
         rate_ranges=RATE_RANGES, num_iterations=NUM_ITERATIONS, initial=INITIAL_METHOD, 
         win_type='hann', verbose=VERBOSE
